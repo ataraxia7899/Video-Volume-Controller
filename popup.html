@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Video Volume Controller</title>
+		<link rel="stylesheet" href="popup.css" />
+	</head>
+	<body>
+		<h3>Video Volume Controller</h3>
+
+		<div class="container">
+			<div class="left-section">
+				<div class="card">
+					<div class="current-volume">
+						<span>Current Volume:</span>
+						<span id="current-volume">100</span>%
+					</div>
+					<div class="volume-controls">
+						<div class="preset-section">
+							<h5>Volume Control</h5>
+							<div class="volume-slider">
+								<input
+									type="range"
+									id="volume-slider"
+									min="0"
+									max="300"
+									value="100"
+								/>
+							</div>
+                            <div class="volume-input">
+                                <input type="number" id="volume-input" min="0" max="300" value="100" />
+                            </div>
+						</div>
+						<div class="preset-section">
+							<h5>Preset Volumes</h5>
+							<div class="preset-buttons">
+								<button class="preset-btn" data-volume="50">50%</button>
+								<button class="preset-btn" data-volume="100">100%</button>
+								<button class="preset-btn" data-volume="150">150%</button>
+								<button class="preset-btn" data-volume="200">200%</button>
+								<button class="preset-btn" data-volume="300">300%</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="popup.js"></script>
+	</body>
+</html>
