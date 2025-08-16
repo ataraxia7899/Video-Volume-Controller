@@ -49,31 +49,29 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // Apply volume to new videos added to the page
 const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(node => {
-            if (node.tagName === 'VIDEO') {
-                // Request volume from background and apply
-                chrome.runtime.sendMessage({ action: 'getVolume' }, response => {
-                    if (chrome.runtime.lastError) {
-                        // console.error(chrome.runtime.lastError.message);
-                    } else if (response && typeof response.volume === 'number') {
-                        applyVolumeToVideos(response.volume);
-                    }
-                });
-            } else if (node.querySelectorAll) {
-                const videos = node.querySelectorAll('video');
-                if (videos.length > 0) {
-                    chrome.runtime.sendMessage({ action: 'getVolume' }, response => {
-                         if (chrome.runtime.lastError) {
-                            // console.error(chrome.runtime.lastError.message);
-                        } else if (response && typeof response.volume === 'number') {
-                            applyVolumeToVideos(response.volume);
-                        }
-                    });
-                }
+    let newVideosFound = false;
+    for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+            // We only care about element nodes
+            if (node.nodeType !== Node.ELEMENT_NODE) continue;
+
+            if (node.tagName === 'VIDEO' || node.querySelector('video')) {
+                newVideosFound = true;
+                break; // Exit inner loop
+            }
+        }
+        if (newVideosFound) break; // Exit outer loop
+    }
+
+    if (newVideosFound) {
+        chrome.runtime.sendMessage({ action: 'getVolume' }, response => {
+            if (chrome.runtime.lastError) {
+                // console.error(chrome.runtime.lastError.message);
+            } else if (response && typeof response.volume === 'number') {
+                applyVolumeToVideos(response.volume);
             }
         });
-    });
+    }
 });
 
 observer.observe(document.body, {
