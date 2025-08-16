@@ -1,0 +1,34 @@
+{
+    "extName": {
+        "message": "Video Volume Controller",
+        "description": "The name of the extension."
+    },
+    "extDescription": {
+        "message": "Control the volume of videos on a per-tab basis.",
+        "description": "The description of the extension."
+    },
+    "popupTitle": {
+        "message": "Video Volume Controller",
+        "description": "The title in the popup."
+    },
+    "currentVolumeLabel": {
+        "message": "Current Volume:",
+        "description": "Label for the current volume."
+    },
+    "volumeControlLabel": {
+        "message": "Volume Control",
+        "description": "Label for the volume control section."
+    },
+    "presetVolumesLabel": {
+        "message": "Preset Volumes",
+        "description": "Label for the preset volumes section."
+    },
+    "globalControlLabel": {
+        "message": "Global Control",
+        "description": "Label for the global control section."
+    },
+    "applyToAllTabsButton": {
+        "message": "Apply to All Tabs",
+        "description": "Text for the apply to all tabs button."
+    }
+}

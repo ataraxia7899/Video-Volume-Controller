@@ -3,22 +3,22 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Video Volume Controller</title>
+		<title data-i18n="extName">Video Volume Controller</title>
 		<link rel="stylesheet" href="popup.css" />
 	</head>
 	<body>
-		<h3>Video Volume Controller</h3>
+		<h3 data-i18n="popupTitle">Video Volume Controller</h3>
 
 		<div class="container">
 			<div class="left-section">
 				<div class="card">
 					<div class="current-volume">
-						<span>Current Volume:</span>
+						<span data-i18n="currentVolumeLabel">Current Volume:</span>
 						<span id="current-volume">100</span>%
 					</div>
 					<div class="volume-controls">
 						<div class="preset-section">
-							<h5>Volume Control</h5>
+							<h5 data-i18n="volumeControlLabel">Volume Control</h5>
 							<div class="volume-slider">
 								<input
 									type="range"
@@ -33,7 +33,7 @@
                             </div>
 						</div>
 						<div class="preset-section">
-							<h5>Preset Volumes</h5>
+							<h5 data-i18n="presetVolumesLabel">Preset Volumes</h5>
 							<div class="preset-buttons">
 								<button class="preset-btn" data-volume="0">0%</button>
 								<button class="preset-btn" data-volume="50">50%</button>
@@ -44,8 +44,8 @@
 							</div>
 						</div>
 						<div class="preset-section">
-							<h5>Global Control</h5>
-							<button id="apply-all-btn" class="apply-all-btn">Apply to All Tabs</button>
+							<h5 data-i18n="globalControlLabel">Global Control</h5>
+							<button id="apply-all-btn" class="apply-all-btn" data-i18n="applyToAllTabsButton">Apply to All Tabs</button>
 						</div>
 					</div>
 				</div>

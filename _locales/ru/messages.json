@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "Контроллер громкости видео"
+    },
+    "extDescription": {
+        "message": "Управляйте громкостью видео на каждой вкладке."
+    },
+    "popupTitle": {
+        "message": "Контроллер громкости видео"
+    },
+    "currentVolumeLabel": {
+        "message": "Текущая громкость:"
+    },
+    "volumeControlLabel": {
+        "message": "Регулятор громкости"
+    },
+    "presetVolumesLabel": {
+        "message": "Предустановленные объемы"
+    },
+    "globalControlLabel": {
+        "message": "Глобальный контроль"
+    },
+    "applyToAllTabsButton": {
+        "message": "Применить ко всем вкладкам"
+    }
+}

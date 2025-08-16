@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "Controlador de Volumen de Video"
+    },
+    "extDescription": {
+        "message": "Controla el volumen de los videos por pestaña."
+    },
+    "popupTitle": {
+        "message": "Controlador de Volumen de Video"
+    },
+    "currentVolumeLabel": {
+        "message": "Volumen Actual:"
+    },
+    "volumeControlLabel": {
+        "message": "Control de Volumen"
+    },
+    "presetVolumesLabel": {
+        "message": "Volúmenes Preestablecidos"
+    },
+    "globalControlLabel": {
+        "message": "Control Global"
+    },
+    "applyToAllTabsButton": {
+        "message": "Aplicar a Todas las Pestañas"
+    }
+}

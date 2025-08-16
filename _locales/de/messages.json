@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "Video-Lautstärkeregler"
+    },
+    "extDescription": {
+        "message": "Steuern Sie die Lautstärke von Videos pro Tab."
+    },
+    "popupTitle": {
+        "message": "Video-Lautstärkeregler"
+    },
+    "currentVolumeLabel": {
+        "message": "Aktuelle Lautstärke:"
+    },
+    "volumeControlLabel": {
+        "message": "Lautstärkeregelung"
+    },
+    "presetVolumesLabel": {
+        "message": "Voreingestellte Lautstärken"
+    },
+    "globalControlLabel": {
+        "message": "Globale Steuerung"
+    },
+    "applyToAllTabsButton": {
+        "message": "Auf alle Registerkarten anwenden"
+    }
+}

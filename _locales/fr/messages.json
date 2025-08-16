@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "Contrôleur de volume vidéo"
+    },
+    "extDescription": {
+        "message": "Contrôlez le volume des vidéos par onglet."
+    },
+    "popupTitle": {
+        "message": "Contrôleur de volume vidéo"
+    },
+    "currentVolumeLabel": {
+        "message": "Volume actuel:"
+    },
+    "volumeControlLabel": {
+        "message": "Contrôle du volume"
+    },
+    "presetVolumesLabel": {
+        "message": "Volumes prédéfinis"
+    },
+    "globalControlLabel": {
+        "message": "Contrôle global"
+    },
+    "applyToAllTabsButton": {
+        "message": "Appliquer à tous les onglets"
+    }
+}

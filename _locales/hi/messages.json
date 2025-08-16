@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "वीडियो वॉल्यूम नियंत्रक"
+    },
+    "extDescription": {
+        "message": "प्रति-टैब आधार पर वीडियो की मात्रा को नियंत्रित करें।"
+    },
+    "popupTitle": {
+        "message": "वीडियो वॉल्यूम नियंत्रक"
+    },
+    "currentVolumeLabel": {
+        "message": "वर्तमान वॉल्यूम:"
+    },
+    "volumeControlLabel": {
+        "message": "वॉल्यूम नियंत्रण"
+    },
+    "presetVolumesLabel": {
+        "message": "प्रीसेट वॉल्यूम"
+    },
+    "globalControlLabel": {
+        "message": "वैश्विक नियंत्रण"
+    },
+    "applyToAllTabsButton": {
+        "message": "सभी टैब पर लागू करें"
+    }
+}

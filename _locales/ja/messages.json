@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "ビデオボリュームコントローラー"
+    },
+    "extDescription": {
+        "message": "タブごとにビデオの音量を制御します。"
+    },
+    "popupTitle": {
+        "message": "ビデオボリュームコントローラー"
+    },
+    "currentVolumeLabel": {
+        "message": "現在の音量："
+    },
+    "volumeControlLabel": {
+        "message": "音量調節"
+    },
+    "presetVolumesLabel": {
+        "message": "プリセットボリューム"
+    },
+    "globalControlLabel": {
+        "message": "グローバルコントロール"
+    },
+    "applyToAllTabsButton": {
+        "message": "すべてのタブに適用"
+    }
+}

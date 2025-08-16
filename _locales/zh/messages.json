@@ -1,0 +1,26 @@
+{
+    "extName": {
+        "message": "视频音量控制器"
+    },
+    "extDescription": {
+        "message": "按标签控制视频的音量。"
+    },
+    "popupTitle": {
+        "message": "视频音量控制器"
+    },
+    "currentVolumeLabel": {
+        "message": "当前音量："
+    },
+    "volumeControlLabel": {
+        "message": "音量控制"
+    },
+    "presetVolumesLabel": {
+        "message": "预设音量"
+    },
+    "globalControlLabel": {
+        "message": "全局控制"
+    },
+    "applyToAllTabsButton": {
+        "message": "应用于所有标签"
+    }
+}

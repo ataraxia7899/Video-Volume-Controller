@@ -1,6 +1,17 @@
 // popup.js
 
+function localize() {
+    document.querySelectorAll('[data-i18n]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        const localizedText = chrome.i18n.getMessage(key);
+        if (localizedText) {
+            elem.textContent = localizedText;
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    localize();
     const volumeSlider = document.getElementById('volume-slider');
     const volumeInput = document.getElementById('volume-input');
     const currentVolumeSpan = document.getElementById('current-volume');
