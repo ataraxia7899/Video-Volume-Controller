@@ -66,8 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     volumeInput.addEventListener('change', (event) => {
         let volumePercent = parseInt(event.target.value, 10);
+        // If input is not a valid number, revert to the slider's value
         if (isNaN(volumePercent)) {
-            volumePercent = 100;
+            event.target.value = volumeSlider.value;
+            return;
         }
         // Clamp the value
         volumePercent = Math.max(0, Math.min(300, volumePercent));
