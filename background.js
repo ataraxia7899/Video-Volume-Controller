@@ -55,6 +55,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         await setVolumeForTab(tabId, volume);
         sendResponse({ success: true });
       }
+    } else if (request.action === 'applyToAllTabs') {
+      const { volume } = request;
+      const tabs = await chrome.tabs.query({});
+      for (const tab of tabs) {
+        // We don't need to check for URL validity here because
+        // setVolumeForTab already handles errors gracefully.
+        if (tab.id) {
+          await setVolumeForTab(tab.id, volume);
+        }
+      }
+      sendResponse({ success: true });
     }
   })();
   // Return true to indicate that the response is sent asynchronously

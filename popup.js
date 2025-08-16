@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeInput = document.getElementById('volume-input');
     const currentVolumeSpan = document.getElementById('current-volume');
     const presetButtons = document.querySelectorAll('.preset-btn');
+    const applyAllBtn = document.getElementById('apply-all-btn');
 
     let activeTabId = null;
 
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             volumeSlider.disabled = true;
             volumeInput.disabled = true;
             presetButtons.forEach(b => b.disabled = true);
+            applyAllBtn.disabled = true;
         }
     });
 
@@ -80,6 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (event) => {
             const volumePercent = event.target.dataset.volume;
             setVolume(volumePercent);
+        });
+    });
+
+    applyAllBtn.addEventListener('click', () => {
+        const volumePercent = volumeSlider.value;
+        const volume = parseFloat(volumePercent) / 100.0;
+        chrome.runtime.sendMessage({
+            action: 'applyToAllTabs',
+            volume: volume
         });
     });
 });
