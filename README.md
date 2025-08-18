@@ -21,7 +21,12 @@
 - **Core**: HTML, CSS, JavaScript (ES6+)
 - **API**: Chrome Extension API (Manifest V3), Web Audio API
 
-## 🚀 로컬에서 확장 프로그램 설치 및 실행하기
+## 🚀 크롬 웹스토어에서 다운받고 실행하기
+
+크롬 웹스토어 링크 : [크롬 웹스토어](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba '볼륨조절 확장프로그램 다운')
+
+~~~
+## 🚀 로컬에서 확장 프로그램 설치 및 실행하기 ( 테스트용 )
 
 이 확장 프로그램을 로컬에서 테스트하려면 다음 단계를 따르세요.
 
@@ -42,6 +47,7 @@ cd Video-Volume-Controller
 3.  좌측 상단에 나타나는 **'압축해제된 확장 프로그램을 로드합니다(Load unpacked)'** 버튼을 클릭합니다.
 4.  파일 탐색기가 열리면, 이 프로젝트를 복제한 **`Video-Volume-Controller`** 폴더 전체를 선택하고 확인을 누릅니다.
 5.  설치가 완료되면 확장 프로그램 목록에서 **Video Volume Controller**를 확인할 수 있습니다.
+~~~
 
 ## 📂 디렉토리 구조
 
