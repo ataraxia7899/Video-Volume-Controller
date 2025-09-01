@@ -2,6 +2,8 @@
 
 // Use a Map to associate AudioContexts and GainNodes with video elements
 const audioState = new Map();
+// Use a WeakMap to keep track of videos that should use standard volume control.
+const standardVolumeVideos = new WeakMap();
 
 function getOrCreateAudioState(video) {
     if (audioState.has(video)) {
@@ -20,26 +22,52 @@ function getOrCreateAudioState(video) {
 function applyVolumeToVideos(volume) {
     const videos = document.querySelectorAll('video');
     videos.forEach(video => {
-        try {
-            // Ensure video is not muted by user
-            if (volume > 0) {
-                video.muted = false;
+        // Decide which volume control method to use, but only once per video.
+        if (standardVolumeVideos.get(video) === undefined) {
+            // If the video is muted and autoplay, we'll stick to standard volume control.
+            // This is a heuristic to avoid breaking complex video players.
+            if (video.muted && video.autoplay) {
+                standardVolumeVideos.set(video, true);
+            } else {
+                standardVolumeVideos.set(video, false);
             }
+        }
 
-            // Use Web Audio API for volume > 100%
-            const state = getOrCreateAudioState(video);
-            
-            // If the context is suspended, try to resume it. This can happen due to autoplay policies.
-            if (state.audioContext.state === 'suspended') {
-                state.audioContext.resume().catch(e => console.error("VVC: Error resuming audio context", e));
+        const useStandardVolume = standardVolumeVideos.get(video);
+
+        if (useStandardVolume) {
+            // Use standard volume control for problematic videos.
+            try {
+                if (volume > 0) {
+                    video.muted = false;
+                }
+                video.volume = Math.min(1, volume);
+            } catch (e) {
+                console.error("VVC: Error applying standard volume", e);
             }
-            
-            state.gainNode.gain.value = volume;
+        } else {
+            // Use Web Audio API for all other videos to allow >100% volume.
+            try {
+                const state = getOrCreateAudioState(video);
+                
+                if (state.audioContext.state === 'suspended') {
+                    state.audioContext.resume().catch(e => console.error("VVC: Error resuming audio context", e));
+                }
+                
+                if (volume > 0) {
+                    video.muted = false;
+                }
+                
+                // Set video element volume to 1 to ensure full signal to the Web Audio API.
+                video.volume = 1;
+                // Use the gain node to control the final volume.
+                state.gainNode.gain.value = volume;
 
-        } catch (error) {
-            console.error('Video Volume Controller Error:', error);
-            // Fallback for videos that don't work with Web Audio API
-            video.volume = Math.min(1, volume);
+            } catch (error) {
+                console.error('Video Volume Controller Error:', error);
+                // Fallback for videos that don't work with Web Audio API
+                video.volume = Math.min(1, volume);
+            }
         }
     });
 }
