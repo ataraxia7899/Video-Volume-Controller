@@ -27,8 +27,14 @@ function applyVolumeToVideos(volume) {
             }
 
             // Use Web Audio API for volume > 100%
-            const { gainNode } = getOrCreateAudioState(video);
-            gainNode.gain.value = volume;
+            const state = getOrCreateAudioState(video);
+            
+            // If the context is suspended, try to resume it. This can happen due to autoplay policies.
+            if (state.audioContext.state === 'suspended') {
+                state.audioContext.resume().catch(e => console.error("VVC: Error resuming audio context", e));
+            }
+            
+            state.gainNode.gain.value = volume;
 
         } catch (error) {
             console.error('Video Volume Controller Error:', error);
