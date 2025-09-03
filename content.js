@@ -3,23 +3,46 @@
 // Use a Map to associate AudioContexts and GainNodes with video elements
 const audioState = new Map();
 
-function getOrCreateAudioState(video) {
+async function getOrCreateAudioState(video) {
     if (audioState.has(video)) {
-        return audioState.get(video);
+        return await audioState.get(video);
     }
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const source = audioContext.createMediaElementSource(video);
-    const gainNode = audioContext.createGain();
-    source.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    const state = { audioContext, source, gainNode };
-    audioState.set(video, state);
-    return state;
+
+    const promise = new Promise((resolve, reject) => {
+        const setup = () => {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioContext.createMediaElementSource(video);
+                const gainNode = audioContext.createGain();
+                source.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                const state = { audioContext, source, gainNode };
+                audioState.set(video, state);
+                resolve(state);
+            } catch (error) {
+                console.error('Video Volume Controller: Error creating audio context.', error);
+                reject(error);
+            }
+        };
+
+        if (video.readyState >= 1) { // HAVE_METADATA
+            setup();
+        } else {
+            video.addEventListener('loadedmetadata', setup, { once: true });
+            video.addEventListener('error', (e) => {
+                console.error('Video Volume Controller: Video element error.', e);
+                reject(new Error('Video element error'));
+            }, { once: true });
+        }
+    });
+
+    audioState.set(video, promise);
+    return promise;
 }
 
-function applyVolumeToVideos(volume) {
+async function applyVolumeToVideos(volume) {
     const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
+    for (const video of videos) {
         try {
             // Ensure video is not muted by user
             if (volume > 0) {
@@ -27,22 +50,26 @@ function applyVolumeToVideos(volume) {
             }
 
             // Use Web Audio API for volume > 100%
-            const { gainNode } = getOrCreateAudioState(video);
-            gainNode.gain.value = volume;
+            const state = await getOrCreateAudioState(video);
+            if (state && state.gainNode) {
+                state.gainNode.gain.value = volume;
+            }
 
         } catch (error) {
             console.error('Video Volume Controller Error:', error);
             // Fallback for videos that don't work with Web Audio API
             video.volume = Math.min(1, volume);
         }
-    });
+    }
 }
 
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'setVolume') {
-        applyVolumeToVideos(request.volume);
-        sendResponse({ success: true });
+        (async () => {
+            await applyVolumeToVideos(request.volume);
+            sendResponse({ success: true });
+        })();
     }
     return true;
 });
