@@ -1,196 +1,178 @@
 const audioState = new Map();
 let pageAudioContext = null;
-let currentVolume = 1.0; // Variable to store the current volume
+let currentVolume = 1.0;
 
 // --- AudioContext Management ---
 
 function resumeAudioContextIfNeeded() {
-	if (pageAudioContext && pageAudioContext.state === 'suspended') {
-		pageAudioContext
-			.resume()
-			.catch((e) => console.error('VVC: AudioContext resume failed.', e));
-	}
+    if (pageAudioContext && pageAudioContext.state === 'suspended') {
+        pageAudioContext.resume().catch((e) => console.error('VVC: AudioContext resume failed.', e));
+    }
 }
 
 function getPageAudioContext() {
-	if (!pageAudioContext) {
-		try {
-			pageAudioContext = new (window.AudioContext ||
-				window.webkitAudioContext)();
-			// The AudioContext is created in a suspended state until a user gesture.
-			// We'll add event listeners to resume it on the first interaction.
-			const resumeEvents = ['click', 'keydown', 'scroll', 'touchstart'];
-			resumeEvents.forEach((eventName) => {
-				document.addEventListener(eventName, resumeAudioContextIfNeeded, {
-					once: true,
-				});
-			});
-		} catch (e) {
-			console.error(
-				'Video Volume Controller: Could not create AudioContext.',
-				e
-			);
-			return null;
-		}
-	}
-	return pageAudioContext;
+    if (!pageAudioContext) {
+        try {
+            pageAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const resumeEvents = ['click', 'keydown', 'scroll', 'touchstart'];
+            resumeEvents.forEach((eventName) => {
+                document.addEventListener(eventName, resumeAudioContextIfNeeded, { once: true });
+            });
+        } catch (e) {
+            console.error('VVC: Could not create AudioContext.', e);
+            return null;
+        }
+    }
+    return pageAudioContext;
 }
 
-async function getOrCreateAudioState(video) {
-	if (audioState.has(video)) {
-		const state = audioState.get(video);
-		return state instanceof Promise ? await state : state;
-	}
+async function getOrCreateAudioState(mediaElement) {
+    if (audioState.has(mediaElement)) {
+        const state = audioState.get(mediaElement);
+        return state instanceof Promise ? await state : state;
+    }
 
-	const promise = new Promise((resolve, reject) => {
-		const setup = () => {
-			const audioContext = getPageAudioContext();
-			if (!audioContext) {
-				resolve({}); // Resolve with empty state if context fails
-				return;
-			}
+    const promise = new Promise((resolve, reject) => {
+        const setup = () => {
+            const audioContext = getPageAudioContext();
+            if (!audioContext) {
+                resolve({});
+                return;
+            }
+            try {
+                const source = audioContext.createMediaElementSource(mediaElement);
+                const gainNode = audioContext.createGain();
+                source.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                const state = { source, gainNode };
+                audioState.set(mediaElement, state);
+                resolve(state);
+            } catch (error) {
+                if (error.name === 'InvalidStateError') {
+                    const state = { inUse: true };
+                    audioState.set(mediaElement, state);
+                    resolve(state);
+                } else {
+                    audioState.delete(mediaElement);
+                    reject(error);
+                }
+            }
+        };
 
-			try {
-				const source = audioContext.createMediaElementSource(video);
-				const gainNode = audioContext.createGain();
-				source.connect(gainNode);
-				gainNode.connect(audioContext.destination);
-				const state = { source, gainNode };
-				audioState.set(video, state); // Replace promise with actual state
-				resolve(state);
-			} catch (error) {
-				if (error.name === 'InvalidStateError') {
-					console.warn(
-						'VVC: Video element is already in use. The extension will not control this video.'
-					);
-					const state = { inUse: true };
-					audioState.set(video, state);
-					resolve(state);
-				} else {
-					audioState.delete(video); // Don't cache errors
-					reject(error);
-				}
-			}
-		};
+        if (mediaElement.readyState >= 1) {
+            setup();
+        } else {
+            mediaElement.addEventListener('loadedmetadata', setup, { once: true });
+            mediaElement.addEventListener('error', (e) => {
+                audioState.delete(mediaElement);
+                reject(new Error('Media element error'));
+            }, { once: true });
+        }
+    });
 
-		if (video.readyState >= 1) {
-			setup();
-		} else {
-			video.addEventListener('loadedmetadata', setup, { once: true });
-			video.addEventListener(
-				'error',
-				(e) => {
-					audioState.delete(video);
-					reject(new Error('Video element error'));
-				},
-				{ once: true }
-			);
-		}
-	});
-
-	audioState.set(video, promise);
-	return promise;
+    audioState.set(mediaElement, promise);
+    return promise;
 }
 
-// --- Volume Application Logic ---
+// --- Core Logic ---
 
-async function applyVolumeToSingleVideo(video, volume) {
-	// Heuristic: Ignore videos that are likely managed by the page's own script.
-	if (video.hasAttribute('autoplay') && video.defaultMuted) {
-		return;
-	}
+async function applyVolumeRespectfully(mediaElement, volume) {
+    if (mediaElement.muted || mediaElement.volume === 0) {
+        return; // Respect site's mute setting
+    }
 
-	let state;
-	try {
-		state = await getOrCreateAudioState(video);
-	} catch (error) {
-		console.error('VVC: Failed to get audio state for video.', error, video);
-		return;
-	}
+    let state;
+    try {
+        state = await getOrCreateAudioState(mediaElement);
+    } catch (error) {
+        console.error('VVC: Failed to get audio state for media element.', error, mediaElement);
+        return;
+    }
 
-	if (!state || state.inUse) {
-		return;
-	}
+    if (!state || state.inUse) {
+        return;
+    }
 
-	if (state.gainNode) {
-		// Always set the gain node's value. This is safe and prepares the volume level.
-		state.gainNode.gain.value = volume;
-
-		// Attempt to unmute if volume is positive. This may trigger an autoplay policy warning,
-		// which is expected. The volume will be correctly applied once the user interacts
-		// with the page or the video itself.
-		if (volume > 0 && video.muted) {
-			// Ensure context is running before trying to make sound.
-			resumeAudioContextIfNeeded();
-			video.muted = false;
-		}
-	}
+    if (state.gainNode) {
+        state.gainNode.gain.value = volume;
+        if (mediaElement.volume !== 1) {
+            mediaElement.volume = 1;
+        }
+        if (mediaElement.muted) {
+            mediaElement.muted = false;
+        }
+    }
 }
 
-async function applyVolumeToAllVideos(volume) {
-	const videos = document.querySelectorAll('video');
-	for (const video of videos) {
-		await applyVolumeToSingleVideo(video, volume);
-	}
+function applyVolumeToAllMediaElements(volume) {
+    const mediaElements = recursivelyFindMediaElements(document.body);
+    for (const media of mediaElements) {
+        applyVolumeRespectfully(media, volume);
+    }
+}
+
+// --- Element Discovery ---
+
+function recursivelyFindMediaElements(element, mediaList = []) {
+    if (!element) return mediaList;
+
+    element.querySelectorAll('video, audio').forEach(media => {
+        if (!mediaList.includes(media)) {
+            mediaList.push(media);
+        }
+    });
+
+    element.querySelectorAll('*').forEach(child => {
+        if (child.shadowRoot) {
+            recursivelyFindMediaElements(child.shadowRoot, mediaList);
+        }
+    });
+    return mediaList;
 }
 
 // --- Observers and Listeners ---
 
 const observer = new MutationObserver((mutations) => {
-	for (const mutation of mutations) {
-		for (const node of mutation.addedNodes) {
-			if (node.nodeType === Node.ELEMENT_NODE) {
-				if (node.tagName === 'VIDEO') {
-					applyVolumeToSingleVideo(node, currentVolume);
-				} else {
-					const videos = node.querySelectorAll('video');
-					videos.forEach((video) =>
-						applyVolumeToSingleVideo(video, currentVolume)
-					);
-				}
-			}
-		}
-	}
+    for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+                const newMediaElements = recursivelyFindMediaElements(node);
+                newMediaElements.forEach(media => applyVolumeRespectfully(media, currentVolume));
+            }
+        }
+    }
 });
 
-// Start observing the document body for new elements
 if (document.body) {
-	observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true });
 } else {
-	// If body is not ready yet, wait for it.
-	document.addEventListener(
-		'DOMContentLoaded',
-		() => {
-			observer.observe(document.body, { childList: true, subtree: true });
-		},
-		{ once: true }
-	);
+    document.addEventListener('DOMContentLoaded', () => {
+        observer.observe(document.body, { childList: true, subtree: true });
+    }, { once: true });
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	if (request.action === 'setVolume') {
-		currentVolume = request.volume;
-		(async () => {
-			await applyVolumeToAllVideos(request.volume);
-			sendResponse({ success: true });
-		})();
-	}
-	return true; // Indicate async response
+    if (request.action === 'setVolume') {
+        currentVolume = request.volume;
+        applyVolumeToAllMediaElements(request.volume);
+        sendResponse({ success: true });
+    }
+    return true;
 });
 
-// --- Initial Volume Application ---
+// --- Initial Application ---
 
 function initialize() {
-	chrome.runtime.sendMessage({ action: 'getVolume' }, (response) => {
-		if (chrome.runtime.lastError) {
-			console.error('VVC:', chrome.runtime.lastError.message);
-			return;
-		}
-		if (response && typeof response.volume === 'number') {
-			currentVolume = response.volume;
-			applyVolumeToAllVideos(currentVolume);
-		}
-	});
+    chrome.runtime.sendMessage({ action: 'getVolume' }, (response) => {
+        if (chrome.runtime.lastError) {
+            console.error('VVC:', chrome.runtime.lastError.message);
+            return;
+        }
+        if (response && typeof response.volume === 'number') {
+            currentVolume = response.volume;
+            applyVolumeToAllMediaElements(currentVolume);
+        }
+    });
 }
 
 initialize();
