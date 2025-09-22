@@ -28,30 +28,41 @@
 									value="100"
 								/>
 							</div>
-                            <div class="volume-input">
-                                <input type="number" id="volume-input" min="0" max="300" value="100" />
-                            </div>
+							<div class="volume-input">
+								<input
+									type="number"
+									id="volume-input"
+									min="0"
+									max="300"
+									value="100"
+								/>
+							</div>
 						</div>
 						<div class="preset-section">
 							<h5 data-i18n="presetVolumesLabel">Preset Volumes</h5>
 							<div class="preset-buttons">
 								<button class="preset-btn" data-volume="0">0%</button>
+								<button class="preset-btn" data-volume="25">25%</button>
 								<button class="preset-btn" data-volume="50">50%</button>
+								<button class="preset-btn" data-volume="75">75%</button>
 								<button class="preset-btn" data-volume="100">100%</button>
 								<button class="preset-btn" data-volume="150">150%</button>
-								<button class="preset-btn" data-volume="200">200%</button>
-								<button class="preset-btn" data-volume="300">300%</button>
 							</div>
 						</div>
 						<div class="preset-section">
 							<h5 data-i18n="globalControlLabel">Global Control</h5>
-							<button id="apply-all-btn" class="apply-all-btn" data-i18n="applyToAllTabsButton">Apply to All Tabs</button>
+							<button
+								id="apply-all-btn"
+								class="apply-all-btn"
+								data-i18n="applyToAllTabsButton"
+							>
+								Apply to All Tabs
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<script src="popup.js"></script>
 	</body>
 </html>
