@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentVolumeSpan = document.getElementById('current-volume');
     const presetButtons = document.querySelectorAll('.preset-btn');
     const applyAllBtn = document.getElementById('apply-all-btn');
+    const shortcutsLink = document.getElementById('shortcuts-link');
 
     let activeTabId = null;
 
@@ -103,5 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
             action: 'applyToAllTabs',
             volume: volume
         });
+    });
+
+    shortcutsLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
     });
 });

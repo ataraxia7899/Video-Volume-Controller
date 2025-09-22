@@ -173,3 +173,33 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         })();
     }
 });
+
+// --- Command Listener for Shortcuts ---
+
+chrome.commands.onCommand.addListener(async (command, tab) => {
+    const tabId = tab.id;
+    if (!tabId) return;
+
+    const currentVolume = await getVolumeForTab(tabId);
+    let newVolume;
+    const VOLUME_STEP = 0.1; // 10%
+
+    switch (command) {
+        case 'increase-volume':
+            newVolume = Math.min(3.0, currentVolume + VOLUME_STEP);
+            break;
+        case 'decrease-volume':
+            newVolume = Math.max(0.0, currentVolume - VOLUME_STEP);
+            break;
+        case 'set-100-percent':
+            newVolume = 1.0;
+            break;
+        case 'toggle-mute':
+            newVolume = currentVolume > 0 ? 0.0 : 1.0;
+            break;
+        default:
+            return; // Unknown command
+    }
+
+    await setVolumeForTab(tabId, newVolume);
+});

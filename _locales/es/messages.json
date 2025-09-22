@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "Aplicar a Todas las Pestañas"
+    },
+    "commandIncreaseVolume": {
+        "message": "Aumentar volumen en 10%"
+    },
+    "commandDecreaseVolume": {
+        "message": "Disminuir volumen en 10%"
+    },
+    "commandToggleMute": {
+        "message": "Silenciar/Activar audio de la pestaña"
+    },
+    "commandSet100": {
+        "message": "Establecer volumen al 100%"
+    },
+    "shortcutInfoText": {
+        "message": "Atajos: Ctrl+Shift+↑/↓ (Volumen), ← (Silenciar), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "Personalizar"
     }
 }

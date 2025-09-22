@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "सभी टैब पर लागू करें"
+    },
+    "commandIncreaseVolume": {
+        "message": "वॉल्यूम 10% बढ़ाएँ"
+    },
+    "commandDecreaseVolume": {
+        "message": "वॉल्यूम 10% घटाएँ"
+    },
+    "commandToggleMute": {
+        "message": "टैब ऑडियो म्यूट/अनम्यूट करें"
+    },
+    "commandSet100": {
+        "message": "वॉल्यूम 100% पर सेट करें"
+    },
+    "shortcutInfoText": {
+        "message": "शॉर्टकट: Ctrl+Shift+↑/↓ (वॉल्यूम), ← (म्यूट), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "अनुकूलित करें"
     }
 }

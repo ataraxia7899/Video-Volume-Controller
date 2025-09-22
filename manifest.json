@@ -17,6 +17,36 @@
 			"128": "icons/icon128.png"
 		}
 	},
+	"commands": {
+		"increase-volume": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Up",
+				"mac": "Command+Shift+Up"
+			},
+			"description": "__MSG_commandIncreaseVolume__"
+		},
+		"decrease-volume": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Down",
+				"mac": "Command+Shift+Down"
+			},
+			"description": "__MSG_commandDecreaseVolume__"
+		},
+		"toggle-mute": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Left",
+				"mac": "Command+Shift+Left"
+			},
+			"description": "__MSG_commandToggleMute__"
+		},
+		"set-100-percent": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Right",
+				"mac": "Command+Shift+Right"
+			},
+			"description": "__MSG_commandSet100__"
+		}
+	},
 	"icons": {
 		"16": "icons/icon16.png",
 		"48": "icons/icon48.png",

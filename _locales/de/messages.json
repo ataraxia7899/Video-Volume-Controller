@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "Auf alle Registerkarten anwenden"
+    },
+    "commandIncreaseVolume": {
+        "message": "Lautstärke um 10 % erhöhen"
+    },
+    "commandDecreaseVolume": {
+        "message": "Lautstärke um 10 % verringern"
+    },
+    "commandToggleMute": {
+        "message": "Tab-Audio stummschalten/aktivieren"
+    },
+    "commandSet100": {
+        "message": "Lautstärke auf 100 % einstellen"
+    },
+    "shortcutInfoText": {
+        "message": "Tastenkürzel: Strg+Umschalt+↑/↓ (Lautstärke), ← (Stummschalten), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "Anpassen"
     }
 }

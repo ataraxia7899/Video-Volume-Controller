@@ -30,5 +30,27 @@
     "applyToAllTabsButton": {
         "message": "Apply to All Tabs",
         "description": "Text for the apply to all tabs button."
+    },
+    "commandIncreaseVolume": {
+        "message": "Increase volume by 10%",
+        "description": "Command to increase volume"
+    },
+    "commandDecreaseVolume": {
+        "message": "Decrease volume by 10%",
+        "description": "Command to decrease volume"
+    },
+    "commandToggleMute": {
+        "message": "Mute/Unmute tab audio",
+        "description": "Command to toggle mute"
+    },
+    "commandSet100": {
+        "message": "Set volume to 100%",
+        "description": "Command to set volume to 100%"
+    },
+    "shortcutInfoText": {
+        "message": "Shortcuts: Ctrl+Shift+↑/↓ (Volume), ← (Mute), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "Customize"
     }
 }

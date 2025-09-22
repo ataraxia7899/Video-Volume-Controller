@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "应用于所有标签"
+    },
+    "commandIncreaseVolume": {
+        "message": "音量增加10%"
+    },
+    "commandDecreaseVolume": {
+        "message": "音量减少10%"
+    },
+    "commandToggleMute": {
+        "message": "静音/取消静音标签页音频"
+    },
+    "commandSet100": {
+        "message": "设置音量为100%"
+    },
+    "shortcutInfoText": {
+        "message": "快捷键: Ctrl+Shift+↑/↓ (音量), ← (静音), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "自定义"
     }
 }

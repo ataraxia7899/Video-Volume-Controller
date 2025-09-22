@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "すべてのタブに適用"
+    },
+    "commandIncreaseVolume": {
+        "message": "音量を10%上げる"
+    },
+    "commandDecreaseVolume": {
+        "message": "音量を10%下げる"
+    },
+    "commandToggleMute": {
+        "message": "タブの音声をミュート/ミュート解除"
+    },
+    "commandSet100": {
+        "message": "音量を100%に設定"
+    },
+    "shortcutInfoText": {
+        "message": "ショートカット: Ctrl+Shift+↑/↓ (音量), ← (ミュート), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "カスタマイズ"
     }
 }

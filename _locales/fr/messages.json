@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "Appliquer à tous les onglets"
+    },
+    "commandIncreaseVolume": {
+        "message": "Augmenter le volume de 10 %"
+    },
+    "commandDecreaseVolume": {
+        "message": "Diminuer le volume de 10 %"
+    },
+    "commandToggleMute": {
+        "message": "Activer/Désactiver le son de l'onglet"
+    },
+    "commandSet100": {
+        "message": "Régler le volume à 100 %"
+    },
+    "shortcutInfoText": {
+        "message": "Raccourcis: Ctrl+Maj+↑/↓ (Volume), ← (Muet), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "Personnaliser"
     }
 }

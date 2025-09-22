@@ -22,5 +22,23 @@
     },
     "applyToAllTabsButton": {
         "message": "모든 탭에 적용"
+    },
+    "commandIncreaseVolume": {
+        "message": "볼륨 10% 증가"
+    },
+    "commandDecreaseVolume": {
+        "message": "볼륨 10% 감소"
+    },
+    "commandToggleMute": {
+        "message": "탭 음소거/음소거 해제"
+    },
+    "commandSet100": {
+        "message": "볼륨 100%로 설정"
+    },
+    "shortcutInfoText": {
+        "message": "단축키: Ctrl+Shift+↑/↓ (볼륨), ← (음소거), → (100%). "
+    },
+    "shortcutInfoLink": {
+        "message": "사용자 지정"
     }
 }
