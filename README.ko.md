@@ -6,6 +6,7 @@
 # 🎵 Video Volume Controller
 
 [![Chrome 웹 스토어](https://img.shields.io/badge/Chrome-웹_스토어-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba)
+[![사용자](https://img.shields.io/chrome-web-store/users/nhoeokdaalacbpdaoggnfdpofaafgjba)](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba)
 [![버전](https://img.shields.io/badge/버전-1.0.7-blue)](https://github.com/ataraxia7899/Video-Volume-Controller)
 [![라이선스](https://img.shields.io/badge/라이선스-MIT-green)](LICENSE)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript&logoColor=white)](https://developer.mozilla.org/ko/docs/Web/JavaScript)
