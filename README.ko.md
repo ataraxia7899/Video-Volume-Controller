@@ -5,11 +5,11 @@
 
 # 🎵 Video Volume Controller
 
-[![Chrome 웹 스토어](https://img.shields.io/badge/Chrome-웹_스토어-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba)
-[![사용자](https://img.shields.io/chrome-web-store/users/nhoeokdaalacbpdaoggnfdpofaafgjba)](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba)
-[![버전](https://img.shields.io/badge/버전-1.0.7-blue)](https://github.com/ataraxia7899/Video-Volume-Controller)
+[![Chrome 웹 스토어](https://img.shields.io/badge/Chrome-웹_스토어-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/begolcfbgiopgodhfijbppokmnddchei)
+[![사용자 수](https://img.shields.io/chrome-web-store/users/begolcfbgiopgodhfijbppokmnddchei?label=사용자%20수&color=blue)](https://chromewebstore.google.com/detail/begolcfbgiopgodhfijbppokmnddchei)
+[![버전](https://img.shields.io/badge/버전-1.1.0-blue)](https://github.com/ataraxia7899/Video-Speed-Up-Chrome-Extension)
 [![라이선스](https://img.shields.io/badge/라이선스-MIT-green)](LICENSE)
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript&logoColor=white)](https://developer.mozilla.org/ko/docs/Web/JavaScript)
+[![언어](https://img.shields.io/badge/언어-JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 **Web Audio API를 활용한 탭별 오디오 볼륨 조절 크롬 확장 프로그램**
 

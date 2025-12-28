@@ -5,11 +5,11 @@
 
 # 🎵 Video Volume Controller
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web_Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba)
-[![Users](https://img.shields.io/chrome-web-store/users/nhoeokdaalacbpdaoggnfdpofaafgjba)](https://chromewebstore.google.com/detail/video-volume-controller/nhoeokdaalacbpdaoggnfdpofaafgjba)
-[![Version](https://img.shields.io/badge/Version-1.0.7-blue)](https://github.com/ataraxia7899/Video-Volume-Controller)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web_Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/begolcfbgiopgodhfijbppokmnddchei)
+[![Users](https://img.shields.io/chrome-web-store/users/begolcfbgiopgodhfijbppokmnddchei)](https://chromewebstore.google.com/detail/begolcfbgiopgodhfijbppokmnddchei)
+[![Version](https://img.shields.io/badge/Version-1.1.0-blue)](https://github.com/ataraxia7899/Video-Speed-Up-Chrome-Extension)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Language](https://img.shields.io/badge/Language-JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 **A Chrome extension that controls tab audio volume with Web Audio API**
 
